@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TaskScreem (
     modifier: Modifier = Modifier
-        .fillMaxSize()
+        .fillMaxSize(),
 ){
     val taskList = listOf(
         "negocios",

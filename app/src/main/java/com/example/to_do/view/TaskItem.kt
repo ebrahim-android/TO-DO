@@ -1,4 +1,8 @@
 package com.example.to_do.view
 
-class TaskItem {
+import androidx.compose.runtime.Composable
+
+
+@Composable
+fun TaskItem() {
 }
