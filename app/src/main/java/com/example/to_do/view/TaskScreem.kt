@@ -1,9 +1,11 @@
 package com.example.to_do.view
 
+import android.graphics.Color
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -33,13 +35,16 @@ fun TaskScreem (
 
     Column (
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxHeight()
     ){
         Theme()
+//        Button()
         TaskDo(
             tasks = taskList
         )
+//        Button()
     }
+    Button()
 }
 
 @Composable
@@ -48,7 +53,7 @@ fun TaskDo(
 ){
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(top = 20.dp)
     ) {
         items(tasks) { taskName ->
@@ -81,6 +86,22 @@ fun TaskItem(taskName: String) {
             fontSize = 20.sp,
             modifier = Modifier.padding(start = 8.dp)
         )
+    }
+}
+
+
+@Composable
+fun Button(){ // botton to add tasks
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        Button(onClick = {},
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(20.dp)) {
+            Text(text = "+")
+        }
     }
 }
 
