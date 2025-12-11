@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.to_do.ui.theme.TODOTheme
 import com.example.to_do.view.TaskScreem
+import com.example.to_do.view.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TODOTheme() {
-                TaskScreem()
+//                TaskScreem()
+                AppNavigation()
             }
         }
     }
@@ -32,7 +34,9 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun TodoPreview(){
         TODOTheme{
-            TaskScreem()
+//            TaskScreem()
+            AppNavigation()
+
         }
     }
 

@@ -1,16 +1,15 @@
 package com.example.to_do.view
 
-import android.graphics.Color
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -21,10 +20,9 @@ import androidx.compose.ui.unit.sp
 
 @Preview(showBackground = true)
 @Composable
-fun TaskScreem (
-    modifier: Modifier = Modifier
-        .fillMaxSize(),
-){
+fun TaskScreem(
+    navigateOtherScreen: () -> Unit = {}
+) {
     val taskList = listOf(
         "negocios",
         "gym",
@@ -44,12 +42,13 @@ fun TaskScreem (
         )
 //        Button()
     }
-    Button()
+    AddButton(navigateOtherScreen = navigateOtherScreen)
 }
 
 @Composable
 fun TaskDo(
-    tasks: List<String>
+    tasks: List<String>,
+    onTaskClick: (String) -> Unit = {}
 ){
     LazyColumn(
         modifier = Modifier
@@ -57,13 +56,18 @@ fun TaskDo(
             .padding(top = 20.dp)
     ) {
         items(tasks) { taskName ->
-            TaskItem(taskName = taskName)
+            TaskItem(taskName = taskName,
+                onClick = { onTaskClick(taskName)}
+            )
         }
     }
 }
 
 @Composable
-fun TaskItem(taskName: String) {
+fun TaskItem(
+    taskName: String,
+    onClick: () -> Unit
+) {
     var isChecked by remember { mutableStateOf(false) }
 
     Row(
@@ -74,13 +78,11 @@ fun TaskItem(taskName: String) {
     ) {
         Checkbox(
             checked = isChecked,
-            onCheckedChange = { newCheckedState ->
-                isChecked = newCheckedState
-            },
+            onCheckedChange = { isChecked = it }
         )
         Text(
             text = taskName,
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 textDecoration = if (isChecked) TextDecoration.LineThrough else null
             ),
             fontSize = 20.sp,
@@ -91,19 +93,24 @@ fun TaskItem(taskName: String) {
 
 
 @Composable
-fun Button(){ // botton to add tasks
+fun AddButton(
+    navigateOtherScreen: () -> Unit 
+){
     Box(
         modifier = Modifier
             .fillMaxSize()
     ){
-        Button(onClick = {},
+        androidx.compose.material3.Button(
+            onClick = { navigateOtherScreen() },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(20.dp)) {
+                .padding(20.dp)
+        ) {
             Text(text = "+")
         }
     }
 }
+
 
 @Composable
 fun Theme( //the theme of our app
