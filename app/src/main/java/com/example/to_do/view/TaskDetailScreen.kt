@@ -62,6 +62,7 @@ fun textDescription( //to write the title
     text: String = "DESCRIPCION"
 ){
     var textAdded by remember { mutableStateOf("") }
+    val maxLine = 20 // limit of 20 character
 
     Column(
         modifier = Modifier
@@ -70,8 +71,10 @@ fun textDescription( //to write the title
     ){
         TextField(
             value = textAdded,
-            onValueChange = { newText ->
-                textAdded = newText
+            onValueChange = {
+                if(it.length <= maxLine){
+                    textAdded = it
+                }
             },
             label = {Text("Write here")},
             modifier = Modifier.padding(16.dp)
